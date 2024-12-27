@@ -1,5 +1,8 @@
+#include <stdint.h>
+
 void func()
 {
+    // inline assembly code
     __asm__ volatile(
         "li t0, 1;"             // load "1" to register t0
         "li t1, 2;"             // load "2" to register t1
@@ -14,4 +17,10 @@ void func()
         "lw t5, 0(t2);"         // load the value in the address in t2 to t5
         "lw t6, 4(t2);"         // load the value in the address in t2 + 4 to t6
     );
+
+    // normal C code
+    uint64_t *mem_base = (uint64_t *)0x80001000;
+    *(mem_base + 0) = (uint64_t)0xb6acad2abb260109;
+    *(mem_base + 1) = (uint64_t)0x11752c63ab69c863;
+
 }
