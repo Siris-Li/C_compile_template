@@ -1,3 +1,17 @@
+import os
+import sys
+
+if len(sys.argv) != 3:
+    print("Usage: python asm2hex.py <input_asm_file> <output_hex_file>")
+    sys.exit(1)
+
+input_asm_file = sys.argv[1]
+output_hex_file = sys.argv[2]
+
+if not os.path.isfile(input_asm_file):
+    print(f"Error: {input_asm_file} does not exist.")
+    sys.exit(1)
+
 data_sections = ['.text', '.rodata']
 data = {'.text': [], '.rodata': []}
 current_section = None
@@ -8,7 +22,7 @@ def big_to_little_endian(hex_str):
     byte_array.reverse()
     return ''.join(format(x, '02x') for x in byte_array)
 
-with open('test_code.asm', 'r') as f:
+with open(input_asm_file, 'r') as f:
     for line in f:
         line = line.strip()
         # 检查是否进入新的段
@@ -35,7 +49,7 @@ with open('test_code.asm', 'r') as f:
                 current_section = None
 
 # 将数据两两配对并输出到文件
-with open('init_mem.hex', 'w') as output_file:
+with open(output_hex_file, 'w') as output_file:
     for section in data_sections:
         for data_values in data[section]:
             # 检查data_values的数目是否为偶数，如果不是，补齐0
