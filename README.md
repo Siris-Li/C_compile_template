@@ -10,12 +10,14 @@ The directory structure and Makefile are designed to handle multiple C source fi
 ├── Makefile
 ├── asm2hex.py
 ├── build
-│   ├── test_code.asm
-│   ├── test_code.hex
-│   └── test_code.o
+│   ├── program.asm
+│   ├── program.hex
+│   └── program.o
 ├── linker.ld
 └── src
-    └── test_code.c
+    ├── main.c
+    └── uart.c
+    └── uart.h
 ```
 
 - `Makefile`: The Makefile used to compile the C source files and generate the necessary output files.
@@ -31,20 +33,24 @@ The directory structure and Makefile are designed to handle multiple C source fi
 To compile all C files in the `src` directory, simply run:
 
 ```sh
-make
+make OUTPUT=<output_name>
 ```
+If you don't specify the `OUTPUT` variable, the default output name will be `program`.
 
-This will compile all `.c` files in the `src` directory and place the output files in the `build` directory.
+This will compile all `.c` files in the `src` directory and place the output files (<output_name>.o, <output_name>.asm, <output_name>.hex) in the `build` directory.
+
 
 ### Compiling a Single C File
 
-To compile a specific C file, pass the `SRC_FILE` variable when running make:
+To compile a specific C file, pass the `SRC_NAME` variable when running make:
 
 ```sh
-make single SRC_FILE=test_code.c
+make single SRC_NAME=<source_name>
 ```
 
-This will compile the specified `.c` file and place the output files in the `build` directory.
+If you don't specify the `SRC_NAME` variable, an error will be thrown.
+
+This will compile the specified `.c` file and place the output files (<source_name>.o, <source_name>.asm, <source_name>.hex) in the `build` directory.
 
 ### Cleaning Up
 
@@ -56,6 +62,8 @@ make clean
 
 ## `asm2hex.py`
 
+This script will be called automatically by the Makefile when compiling C files.
+
 The `asm2hex.py` script converts assembly files to hex files. It takes two command-line arguments: the input assembly file and the output hex file.
 
 ### Usage
@@ -63,3 +71,7 @@ The `asm2hex.py` script converts assembly files to hex files. It takes two comma
 ```sh
 python asm2hex.py <input_asm_file> <output_hex_file>
 ```
+
+## RISCV Toolchain
+
+If you want to install a RISCV toolchain, please refer to [RISCV Toolchain](https://github.com/Siris-Li/RISC-V-GCC-TOOLCHAIN) for more information.

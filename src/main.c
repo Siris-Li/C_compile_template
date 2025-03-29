@@ -1,6 +1,7 @@
 #include <stdint.h>
+#include "uart.h"
 
-void func() {
+int main() {
   // inline assembly code
   __asm__ volatile(
       "li t0, 1;"           // load "1" to register t0
@@ -21,4 +22,10 @@ void func() {
   uint64_t* mem_base = (uint64_t*)0x80001000;
   *(mem_base + 0) = (uint64_t)0xb6acad2abb260109;
   *(mem_base + 1) = (uint64_t)0x11752c63ab69c863;
+
+  // function call
+  init_uart();
+  print_uart("Hello, World!\n");
+
+  return 0;
 }
