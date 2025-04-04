@@ -1,3 +1,9 @@
+##################################################################################
+# Author:          Mingxuan Li, Zhantong Zhu
+# Acknowledgement: Cursor + Claude
+# Description:     C Code Compile Script for RISCV
+##################################################################################
+
 RISCV_GCC?=~/RISC-V-GCC-TOOLCHAIN/riscv/bin/riscv-none-elf-gcc
 RISCV_OBJDUMP?=~/RISC-V-GCC-TOOLCHAIN/riscv/bin/riscv-none-elf-objdump
 

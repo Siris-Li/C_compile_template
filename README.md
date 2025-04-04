@@ -28,6 +28,25 @@ The directory structure and Makefile are designed to handle multiple C source fi
 
 ## Usage
 
+### Prerequisites
+
+- RISCV Toolchain
+- Python 3.x
+
+Before running the Makefile, you need to set the RISCV_GCC and RISCV_OBJDUMP environment variables to the path of your RISCV toolchain.
+
+```sh
+export RISCV_GCC=<path_to_riscv_gcc>
+export RISCV_OBJDUMP=<path_to_riscv_objdump>
+```
+
+or you can set the environment variables in the Makefile:
+
+```sh
+RISCV_GCC?=<path_to_riscv_gcc>
+RISCV_OBJDUMP?=<path_to_riscv_objdump>
+```
+
 ### Compiling All C Files
 
 To compile all C files in the `src` directory, simply run:

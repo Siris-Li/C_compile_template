@@ -1,3 +1,9 @@
+##################################################################################
+# Author:          Mingxuan Li
+# Acknowledgement: Cursor + Claude
+# Description:     Convert assembly code to hex code for simulation
+##################################################################################
+
 import os
 import sys
 
