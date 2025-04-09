@@ -9,6 +9,7 @@ The directory structure and Makefile are designed to handle multiple C source fi
 .
 ├── Makefile
 ├── asm2hex.py
+├── 64b_2_128b.py
 ├── build
 │   ├── program.asm
 │   ├── program.hex
@@ -16,12 +17,14 @@ The directory structure and Makefile are designed to handle multiple C source fi
 ├── linker.ld
 └── src
     ├── main.c
-    └── uart.c
+    ├── start.c
+    ├── uart.c
     └── uart.h
 ```
 
 - `Makefile`: The Makefile used to compile the C source files and generate the necessary output files.
 - `asm2hex.py`: A Python script to convert assembly files to hex files.
+- `64b_2_128b.py`: A Python script to convert the data width of the hex file.
 - `linker.ld`: The linker script used during the compilation process.
 - `src/`: Directory containing the C source files.
 - `build/`: Directory where the compiled object files, assembly files, and hex files will be placed.
@@ -90,6 +93,20 @@ The `asm2hex.py` script converts assembly files to hex files. It takes two comma
 ```sh
 python asm2hex.py <input_asm_file> <output_hex_file>
 ```
+
+## `64b_2_128b.py`
+
+This script converts the generated `program.hex` into a 128-bit wide hex file `program_128b.hex`.
+
+This is needed if the data width main memory of your system doesn't match 64-bit. Modifications are needed if your main memory width is not 128-bit.
+
+### Usage
+
+```sh
+python 64b_2_128b.py
+```
+
+The script will find the `build/program.hex` and convert it to `build/program_128b.hex`.
 
 ## RISCV Toolchain
 
