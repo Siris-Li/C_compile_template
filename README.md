@@ -17,7 +17,8 @@ The directory structure and Makefile are designed to handle multiple C source fi
 ├── linker.ld
 └── src
     ├── main.c
-    └── uart.c
+    ├── start.c
+    ├── uart.c
     └── uart.h
 ```
 
