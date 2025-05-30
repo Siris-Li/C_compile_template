@@ -16,6 +16,12 @@ SECTIONS
         *(.rodata.*)
     }
 
+    .data : {
+        . = ALIGN(16);
+        *(.data)
+        *(.data.*)
+    }
+
     .bss : {
         . = ALIGN(16);
         *(.bss)

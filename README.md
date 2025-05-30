@@ -8,12 +8,14 @@ The directory structure and Makefile are designed to handle multiple C source fi
 ```
 .
 ├── Makefile
-├── asm2hex.py
-├── 64b_2_128b.py
+├── utils
+│   ├── 64b_2_128b.py
+│   └── asm2hex.py
 ├── build
-│   ├── program.asm
-│   ├── program.hex
-│   └── program.o
+│   ├── main.asm
+│   └── main.hex
+├── bin
+│   └── main.o
 ├── linker.ld
 └── src
     ├── main.c
@@ -23,11 +25,12 @@ The directory structure and Makefile are designed to handle multiple C source fi
 ```
 
 - `Makefile`: The Makefile used to compile the C source files and generate the necessary output files.
-- `asm2hex.py`: A Python script to convert assembly files to hex files.
-- `64b_2_128b.py`: A Python script to convert the data width of the hex file.
+- `utils/asm2hex.py`: A Python script to convert assembly files to hex files.
+- `utils/64b_2_128b.py`: A Python script to convert the data width of the hex file.
 - `linker.ld`: The linker script used during the compilation process.
 - `src/`: Directory containing the C source files.
-- `build/`: Directory where the compiled object files, assembly files, and hex files will be placed.
+- `build/`: Directory where the compiled disassembly files and hex files will be placed.
+- `bin/`: Directory where the compiled object files will be placed.
 
 ## Usage
 
@@ -50,29 +53,16 @@ RISCV_GCC?=<path_to_riscv_gcc>
 RISCV_OBJDUMP?=<path_to_riscv_objdump>
 ```
 
-### Compiling All C Files
+### Compiling C Files
 
-To compile all C files in the `src` directory, simply run:
-
-```sh
-make OUTPUT=<output_name>
-```
-If you don't specify the `OUTPUT` variable, the default output name will be `program`.
-
-This will compile all `.c` files in the `src` directory and place the output files (<output_name>.o, <output_name>.asm, <output_name>.hex) in the `build` directory.
-
-
-### Compiling a Single C File
-
-To compile a specific C file, pass the `SRC_NAME` variable when running make:
+To compile C files in the `src` directory, simply run:
 
 ```sh
-make single SRC_NAME=<source_name>
+make MAIN=<main_file_name>
 ```
+If you don't specify the `MAIN` variable, the default main file name will be `main`.
 
-If you don't specify the `SRC_NAME` variable, an error will be thrown.
-
-This will compile the specified `.c` file and place the output files (<source_name>.o, <source_name>.asm, <source_name>.hex) in the `build` directory.
+This will compile  `${MAIN}.c` files and all dependencies (found automatically by script) in the `src` directory and place the output files (`bin/${MAIN}.o, build/${MAIN}.asm, build/${MAIN}.hex`).
 
 ### Cleaning Up
 

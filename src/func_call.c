@@ -1,0 +1,15 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Author:          Mingxuan Li, Zhantong Zhu
+// Acknowledgement: Cursor + Claude
+// Description:     C Code Template for RISC-V
+//////////////////////////////////////////////////////////////////////////////////
+
+#include "uart.h"
+
+int main() {
+  // function call
+  init_uart();
+  print_uart("Hello, World!\n");
+
+  return 0;
+}

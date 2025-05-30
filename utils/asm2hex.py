@@ -18,15 +18,17 @@ if not os.path.isfile(input_asm_file):
     print(f"Error: {input_asm_file} does not exist.")
     sys.exit(1)
 
-data_sections = ['.text', '.rodata']
-data = {'.text': [], '.rodata': []}
+data_sections = ['.text', '.rodata', '.data']
+data = {'.text': [], '.rodata': [], '.data': []}
 current_section = None
 
 def big_to_little_endian(hex_str):
     # 将大端表示的16进制字符串转换为小端表示的16进制字符串
     byte_array = bytearray.fromhex(hex_str)
     byte_array.reverse()
-    return ''.join(format(x, '02x') for x in byte_array)
+    little_endian_hex = ''.join(format(x, '02x') for x in byte_array)
+    # 确保输出为8个十六进制数字（4字节），不足则在前面补零
+    return little_endian_hex.zfill(8)
 
 with open(input_asm_file, 'r') as f:
     for line in f:
