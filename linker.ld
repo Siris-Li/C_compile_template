@@ -28,4 +28,10 @@ SECTIONS
         *(.bss.*)
         *(COMMON)
     }
+
+    . = 0x30000000;
+    .custom_data : {
+        *(.custom_data)
+        *(.custom_data.*)
+    }
 }

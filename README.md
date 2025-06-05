@@ -9,28 +9,35 @@ The directory structure and Makefile are designed to handle multiple C source fi
 .
 ├── Makefile
 ├── utils
+│   ├── gdb_scripts.py
 │   ├── 64b_2_128b.py
 │   └── asm2hex.py
 ├── build
 │   ├── main.asm
 │   └── main.hex
 ├── bin
-│   └── main.o
+│   └── main.elf
+├── scripts
+│   └── main.gdb
 ├── linker.ld
 └── src
     ├── main.c
-    ├── start.c
+    ├── func_call.c
+    ├── inline_assembly.c
+    ├── startup.S
     ├── uart.c
     └── uart.h
 ```
 
 - `Makefile`: The Makefile used to compile the C source files and generate the necessary output files.
+- `utils/gdb_scripts.py`: A Python script to generate GDB scripts for debugging.
 - `utils/asm2hex.py`: A Python script to convert assembly files to hex files.
 - `utils/64b_2_128b.py`: A Python script to convert the data width of the hex file.
 - `linker.ld`: The linker script used during the compilation process.
 - `src/`: Directory containing the C source files.
 - `build/`: Directory where the compiled disassembly files and hex files will be placed.
 - `bin/`: Directory where the compiled object files will be placed.
+- `scripts/`: Directory where the generated GDB scripts will be placed.
 
 ## Usage
 
@@ -62,7 +69,7 @@ make MAIN=<main_file_name>
 ```
 If you don't specify the `MAIN` variable, the default main file name will be `main`.
 
-This will compile  `${MAIN}.c` files and all dependencies (found automatically by script) in the `src` directory and place the output files (`bin/${MAIN}.o, build/${MAIN}.asm, build/${MAIN}.hex`).
+This will compile  `${MAIN}.c` files and all dependencies (found automatically by script) in the `src` directory and generate the output files (`bin/${MAIN}.elf, build/${MAIN}.asm, build/${MAIN}.hex, scripts/`).
 
 ### Cleaning Up
 
@@ -70,6 +77,16 @@ To clean up the `build` directory and remove all generated files, run:
 
 ```sh
 make clean
+```
+
+## `gdb_scripts.py`
+
+This script generates GDB scripts for debugging the compiled C files, which will be called automatically by the Makefile.
+
+### Usage
+
+```sh
+python gdb_scripts.py <main_file_name>
 ```
 
 ## `asm2hex.py`

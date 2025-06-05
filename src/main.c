@@ -42,6 +42,18 @@
 #include <stdint.h>
 #include "uart.h"
 
+__attribute__((section(".custom_data")))
+static const uint64_t custom_patterns[] = {
+    0x1234567890abcdef,
+    0xfedcba0987654321,
+    0xaaaaaaaaaaaaaaaa,
+    0x5555555555555555,
+    0x0011223344556677,
+    0x8899aabbccddeeff,
+    0xdeadbeefdeadbeef,
+    0xfeedfacefeedface
+};
+
 int main() {
   // inline assembly code
   __asm__ volatile(

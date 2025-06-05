@@ -1,4 +1,5 @@
 .vscode/
-.build/
-.bin/
+build/
+bin/
+scripts/
 .DS_Store
