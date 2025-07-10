@@ -1,6 +1,7 @@
 // Copyright OpenHW Group contributors.
 // Licensed under the Apache License, Version 2.0, see LICENSE for details.
 // SPDX-License-Identifier: Apache-2.0
+// Modifier: Mingxuan Li <mingxuanli_siris@163.com> [Peking University]
 
 #pragma once
 
@@ -20,14 +21,26 @@
 #define UART_DLAB_LSB UART_BASE + 0
 #define UART_DLAB_MSB UART_BASE + 4
 
-void init_uart();
-
-int read_serial(uint8_t *res);
+void init_uart(uint32_t freq, uint32_t baud);
 
 void print_uart(const char* str);
 
-void print_uart_int(uint32_t addr);
+void print_uart_int(uint32_t data);
 
 void print_uart_addr(uint64_t addr);
 
 void print_uart_byte(uint8_t byte);
+
+void print_uart_char(char c);
+
+void load_uart(char *str, char terminator);
+
+void load_uart_int(uint32_t *data);
+
+void load_uart_addr(uint64_t *addr);
+
+void load_uart_byte(uint8_t *byte);
+
+int load_uart_char(uint8_t *res);
+
+void load_uart_timeout(char *str, char terminator, int max_len, uint32_t timeout);
