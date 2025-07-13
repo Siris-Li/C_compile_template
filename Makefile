@@ -19,8 +19,7 @@ OUTPUT_ASM=$(BUILD_DIR)/$(MAIN).asm
 OUTPUT_HEX=$(BUILD_DIR)/$(MAIN).hex
 
 ALL_DEPENDENCIES = $(shell $(RISCV_GCC) -M $(SRC_DIR)/$(MAIN).c 2>/dev/null | sed -e 's/^[^:]*: *//' -e 's/\\$$//' | tr -d '\n')
-SRC_FILES = $(sort $(patsubst %.h,%.c, $(filter $(SRC_DIR)/%, $(ALL_DEPENDENCIES))))
-
+SRC_FILES = $(sort $(foreach file, $(patsubst %.h,%.c, $(filter $(SRC_DIR)/%, $(ALL_DEPENDENCIES))), $(if $(wildcard $(file)), $(file))))
 
 all: $(OUTPUT_ELF)
 
