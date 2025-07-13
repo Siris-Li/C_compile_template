@@ -8,7 +8,7 @@
 
 int main() {
   // function call
-  init_uart();
+  init_uart(10000000, 101000);
   print_uart("Hello, World!\n");
 
   return 0;
