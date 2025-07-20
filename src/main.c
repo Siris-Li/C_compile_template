@@ -77,7 +77,7 @@ int main() {
   *(mem_base + 1) = (uint64_t)0x11752c63ab69c863;
 
   // function call
-  init_uart();
+  init_uart(10000000， 115200);
   print_uart("Hello, World!\n");
 
   return 0;
