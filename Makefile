@@ -34,3 +34,6 @@ $(OUTPUT_ELF): $(SRC_FILES)
 
 clean:
 	rm -rf $(BUILD_DIR)
+
+.PHONY:
+	all clean
