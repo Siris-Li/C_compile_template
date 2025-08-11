@@ -1,0 +1,6 @@
+{
+    "name": "RISC-V Compiling",
+    "image": "SirisLi/riscv-docker:v1.0",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home,type=bind",
+    "workspaceFolder": "/home"
+}
